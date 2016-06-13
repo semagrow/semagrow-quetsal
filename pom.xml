@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>eu.semagrow</groupId>
   <artifactId>semagrow-quetsal</artifactId>
-  <version>1.4.1</version>
+  <version>1.5</version>
   <packaging>jar</packaging>
 
   <name>semagrow-quetsal</name>
@@ -19,6 +19,18 @@
       <semagrow.version>${project.version}</semagrow.version>
   </properties>
 
+  <repositories>
+
+  <repository>
+            <id>swc-semagrow</id>
+            <name>SWC SemaGrow Repository</name>
+            <url>http://semagrow.semantic-web.at/mvn/</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+                <enabled>true</enabled>
+            </snapshots>
+  </repository>
+  </repositories>
   <dependencies>
     <!-- OPENRDF SESAME -->
     <dependency>
