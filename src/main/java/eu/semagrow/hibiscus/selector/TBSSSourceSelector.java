@@ -2,13 +2,10 @@ package eu.semagrow.hibiscus.selector;
 
 import eu.semagrow.core.source.SourceMetadata;
 import eu.semagrow.core.source.SourceSelector;
-import org.openrdf.query.BindingSet;
-import org.openrdf.query.Dataset;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.query.algebra.StatementPattern;
-import org.openrdf.query.algebra.TupleExpr;
-import org.openrdf.repository.RepositoryException;
+import org.eclipse.rdf4j.query.BindingSet;
+import org.eclipse.rdf4j.query.Dataset;
+import org.eclipse.rdf4j.query.algebra.StatementPattern;
+import org.eclipse.rdf4j.query.algebra.TupleExpr;
 import org.aksw.simba.quetzal.core.TBSSSourceSelection;
 
 import java.util.*;
@@ -38,13 +35,9 @@ public class TBSSSourceSelector extends QuetsalSourceSelector implements SourceS
         String query = null;
         try {
             this.impl = new TBSSSourceSelection(members, cache, query);
-            HashMap<Integer, List<StatementPattern>> bgpGrps =  generateBgpGroups(expr);
+            HashMap<Integer, List<org.openrdf.query.algebra.StatementPattern>> bgpGrps =  generateBgpGroups(expr);
             return toSourceMetadata(this.impl.performSourceSelection(bgpGrps));
-        } catch (MalformedQueryException e) {
-            e.printStackTrace();
-        } catch (RepositoryException e) {
-            e.printStackTrace();
-        } catch (QueryEvaluationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

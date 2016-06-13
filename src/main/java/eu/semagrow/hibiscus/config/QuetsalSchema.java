@@ -1,10 +1,10 @@
 package eu.semagrow.hibiscus.config;
 
-import org.openrdf.model.Namespace;
-import org.openrdf.model.URI;
-import org.openrdf.model.ValueFactory;
-import org.openrdf.model.impl.NamespaceImpl;
-import org.openrdf.model.impl.ValueFactoryImpl;
+import org.eclipse.rdf4j.model.Namespace;
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.SimpleNamespace;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 
 /**
  * Created by angel on 16/6/2015.
@@ -16,19 +16,19 @@ public class QuetsalSchema {
 
     public static final String PREFIX = "quetsal";
 
-    public static Namespace NS = new NamespaceImpl(PREFIX, NAMESPACE);
+    public static Namespace NS = new SimpleNamespace(PREFIX, NAMESPACE);
 
-    public static final URI SUMMARIES;
+    public static final IRI SUMMARIES;
 
-    public static final URI MODE ;
+    public static final IRI MODE ;
 
-    public static final URI COMMONPREDTHREASHOLD ;
+    public static final IRI COMMONPREDTHREASHOLD ;
 
 
     static  {
-        ValueFactory vf = ValueFactoryImpl.getInstance();
-        SUMMARIES = vf.createURI(NAMESPACE, "summariesFile");
-        COMMONPREDTHREASHOLD = vf.createURI(NAMESPACE, "commonPredThreshold");
-        MODE = vf.createURI(NAMESPACE, "hibiscusMode");
+        ValueFactory vf = SimpleValueFactory.getInstance();
+        SUMMARIES = vf.createIRI(NAMESPACE, "summariesFile");
+        COMMONPREDTHREASHOLD = vf.createIRI(NAMESPACE, "commonPredThreshold");
+        MODE = vf.createIRI(NAMESPACE, "hibiscusMode");
     }
 }

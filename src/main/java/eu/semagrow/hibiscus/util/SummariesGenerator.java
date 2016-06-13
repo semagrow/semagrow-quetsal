@@ -1,10 +1,9 @@
 package eu.semagrow.hibiscus.util;
 
-import eu.semagrow.commons.vocabulary.SEVOD;
-import eu.semagrow.commons.vocabulary.VOID;
+import eu.semagrow.hibiscus.vocab.SEVOD;
+import eu.semagrow.hibiscus.vocab.VOID;
 import eu.semagrow.hibiscus.vocab.QuetsalSummaries;
 import org.openrdf.model.Statement;
-import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;

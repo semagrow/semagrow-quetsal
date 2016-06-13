@@ -3,12 +3,12 @@ package eu.semagrow.hibiscus.config;
 import eu.semagrow.core.config.SemagrowSchema;
 import eu.semagrow.core.config.SourceSelectorConfigException;
 import eu.semagrow.core.config.SourceSelectorImplConfigBase;
-import org.openrdf.model.Graph;
-import org.openrdf.model.Literal;
-import org.openrdf.model.Resource;
-import org.openrdf.model.ValueFactory;
-import org.openrdf.model.util.GraphUtil;
-import org.openrdf.model.util.GraphUtilException;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Literal;
+import org.eclipse.rdf4j.model.Resource;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.model.util.Models;
 
 /**
  * Created by angel on 16/6/2015.
@@ -56,9 +56,9 @@ public class QuetsalSourceSelectorImplConfig extends SourceSelectorImplConfigBas
 
 
     @Override
-    public Resource export(Graph graph) {
+    public Resource export(Model graph) {
         Resource node = super.export(graph);
-        ValueFactory vf = graph.getValueFactory();
+        ValueFactory vf = SimpleValueFactory.getInstance();
 
         if (mode != null)
             graph.add(node, QuetsalSchema.MODE, vf.createLiteral(mode));
@@ -73,35 +73,32 @@ public class QuetsalSourceSelectorImplConfig extends SourceSelectorImplConfigBas
     }
 
     @Override
-    public void parse(Graph graph, Resource resource)
+    public void parse(Model graph, Resource resource)
             throws SourceSelectorConfigException
     {
-        try {
-            Literal summariesLit = GraphUtil.getOptionalObjectLiteral(graph, resource, QuetsalSchema.SUMMARIES);
-            if (summariesLit != null) {
-                summariesFile = summariesLit.getLabel();
-            }
 
-            Literal metadataLit = GraphUtil.getOptionalObjectLiteral(graph, resource, SemagrowSchema.METADATAINIT);
-            if (metadataLit != null) {
-                metadataFile = metadataLit.getLabel();
-            }
-
-            Literal modeLit = GraphUtil.getOptionalObjectLiteral(graph, resource, QuetsalSchema.MODE);
-
-            if (modeLit != null) {
-                mode = modeLit.getLabel();
-            }
-
-            Literal commonPredLit = GraphUtil.getOptionalObjectLiteral(graph, resource, QuetsalSchema.COMMONPREDTHREASHOLD);
-
-            if (commonPredLit != null) {
-                commonPredicateThreshold = commonPredLit.doubleValue();
-            }
-
-        } catch (GraphUtilException e) {
-            throw new SourceSelectorConfigException(e);
+        Literal summariesLit = Models.objectLiteral(graph.filter(resource, QuetsalSchema.SUMMARIES, null)).get();
+        if (summariesLit != null) {
+            summariesFile = summariesLit.getLabel();
         }
+
+        Literal metadataLit = Models.objectLiteral(graph.filter(resource, SemagrowSchema.METADATAINIT,null)).get();
+        if (metadataLit != null) {
+            metadataFile = metadataLit.getLabel();
+        }
+
+        Literal modeLit = Models.objectLiteral(graph.filter(resource, QuetsalSchema.MODE,null)).get();
+
+        if (modeLit != null) {
+            mode = modeLit.getLabel();
+        }
+
+        Literal commonPredLit = Models.objectLiteral(graph.filter(resource, QuetsalSchema.COMMONPREDTHREASHOLD,null)).get();
+
+        if (commonPredLit != null) {
+            commonPredicateThreshold = commonPredLit.doubleValue();
+        }
+
 
     }
 }
