@@ -20,16 +20,18 @@
   </properties>
 
   <repositories>
-
-  <repository>
-            <id>swc-semagrow</id>
-            <name>SWC SemaGrow Repository</name>
-            <url>http://semagrow.semantic-web.at/mvn/</url>
-            <snapshots>
-                <updatePolicy>always</updatePolicy>
-                <enabled>true</enabled>
-            </snapshots>
-  </repository>
+      <repository>
+        <snapshots>
+          <enabled>false</enabled>
+        </snapshots>
+        <id>central</id>
+        <name>Central Repository</name>
+        <url>https://repo.maven.apache.org/maven2</url>
+      </repository>
+  		<repository>
+  		    <id>jitpack.io</id>
+  		    <url>https://jitpack.io</url>
+  		</repository>
   </repositories>
   <dependencies>
     <!-- OPENRDF SESAME -->
@@ -69,13 +71,8 @@
       <version>${semagrow.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.fluidops</groupId>
-      <artifactId>fedx</artifactId>
-      <version>3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.aksw.simba</groupId>
-      <artifactId>quetsal</artifactId>
+      <groupId>com.github.semagrow</groupId>
+	    <artifactId>fork-quetsal</artifactId>
       <version>1.0-r12</version>
     </dependency>
       <dependency>
